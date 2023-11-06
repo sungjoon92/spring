@@ -1,0 +1,169 @@
+@charset "utf-8";
+
+/* https://www.w3schools.com/cssref/css_selectors.php */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-family: 궁서체;
+    font-size: 40px;
+    font-weight: bold;
+    font-size: initial;
+}
+
+
+div {
+    width: 30%;
+    height: 150px;
+}
+
+div p {
+    background-color: red;
+    display: block;
+    animation-name: a1;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+
+@keyframes a1 {
+    0% {
+        transform: translateX(30%)translateY(30%)rotate(180deg);
+        opacity: 0.3%;
+
+    }
+
+    100% {
+        background: rgb(22, 224, 49);
+        transition: 2s;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+div span::before,
+div span::after {
+    content: "";
+    width: 100px;
+    border: 2px solid #000;
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
+}
+
+
+
+div span::before {
+    transform: rotate(30deg);
+    margin-top: 100px;
+}
+
+div span::after {
+    transform: rotate(-30deg);
+    margin-top: 50px;
+
+}
+
+h2,
+p {
+    color: blue;
+}
+
+div>span>p {
+    text-decoration-line: line-through;
+    text-decoration-color: yellow;
+    text-decoration-style: dotted;
+}
+
+div h2 {
+    font-size: 50px;
+}
+
+
+
+
+#mybox {
+    width: 320px;
+    padding: 10px;
+    border: 5px solid #000;
+    margin: auto;
+}
+
+#menu {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+}
+
+.hide {
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+}
+
+#nav {
+    width: 300px;
+    height: 500px;
+    background: beige;
+    margin: auto;
+}
+
+#nav ul {
+    list-style: none;
+}
+
+#nav .news {
+    background: olive;
+    font-weight: bold;
+}
+
+#nav ul .news {
+    background: #546;
+}
+
+#nav ol li:nth-child(2) {
+    font-weight: bold;
+}
+
+/*    참조 https://www.w3schools.com/cssref/sel_active.asp
+   a:link     - 일반적 링크 및 방문하지 않은 링크
+   a:visited  - 방문했던 링크
+   a:hover    - 마우스 올렸을 때 링크
+   a:active   - 마우스 누르는 순간의 링크
+*/
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {}
+
+#nav ol li a {
+    width: 200px;
+    height: 100px;
+    background-color: hotpink;
+    text-decoration-style: wavy;
+}

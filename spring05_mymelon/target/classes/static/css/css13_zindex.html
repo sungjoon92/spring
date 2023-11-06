@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zindex</title>
+</head>
+
+<style>
+    #aa {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+    }
+
+    #bb {
+
+        width: 80px;
+        height: 200px;
+        background: green;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
+    }
+
+    #cc {
+
+        width: 60px;
+        height: 300px;
+        background: blue;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+</style>
+
+<body>
+    <!-- https://www.w3schools.com/css/css_z-index.asp -->
+
+    <div id="aa"></div>
+    <div id="bb"></div>
+    <div id="cc"></div>
+
+
+
+</body>
+
+</html>

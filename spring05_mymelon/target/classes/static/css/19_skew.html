@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19_skew</title>
+</head>
+
+<style>
+    h1{
+     text-align: auto;
+    }
+
+    h1 span{
+        width: 80px;
+        height: 120px;
+        font-size: black;
+        display: inline-block;
+        border: 1px solid #000;
+        box-shadow: 1px 1px 2px;
+        margin: 5px;
+    }
+    
+
+    h1> span:nth-child(even){
+        transform: skewY(-20deg);
+    }
+    h1> span:nth-child(odd){
+        transform: skewX(20deg);
+    }
+</style>
+
+<body>
+<h1>
+    <span>c</span>
+    <span>s</span>
+    <span>s</span>
+    <span>3</span>
+</h1>
+</body>
+
+</html>

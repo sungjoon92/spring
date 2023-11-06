@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>Bootstrap Theme Simply Me</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    header {
+        position: fixed;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.7);
+        z-index: 2;
+    }
+
+    nav {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    nav ul li {}
+
+    nav ul li a {
+        font-size: 30px;
+        animation: scllor 10s ease-in-out;
+    }
+    @keyframes scllor {
+        100%{
+            transform: translateX(100%);
+        }       
+    }
+
+    .bg-1 {
+        background-color: hsl(83, 94%, 49%);
+        /* Green */
+        color: #ffffff;
+    }
+
+    .bg-1 h3 {
+        position: absolute;
+    }
+
+    .bg-1 h3:nth-of-type(2) {
+        color: black;
+        top: 200px
+    }
+
+    .bg-1 h3:hover {
+        transition: 2s;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    .frodo:hover {
+        transform: rotate(360deg);
+    }
+
+    .bg-2 {
+        background-color: #474e5d;
+        /* Dark Blue */
+        color: #ffffff;
+    }
+
+    .bg-3 {
+        background-color: #fff;
+        /* White */
+        color: #555555;
+    }
+
+    .jumbotron {
+        background-color: #f4511e;
+        color: #fff;
+        padding: 100px 25px;
+    }
+
+    .container-fluid {
+        padding: 60px 50px;
+    }
+
+    .bg-grey {
+        background-color: #f6f6f6;
+    }
+
+    .logo-small {
+        color: #f4511e;
+        font-size: 50px;
+    }
+
+    .logo {
+        color: #f4511e;
+        font-size: 200px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .col-sm-4 {
+            text-align: center;
+            margin: 25px 0;
+        }
+    }
+</style>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#main">menu1</a></li>
+                <li><a href="#menu1">menu2</a></li>
+                <li><a href="#menu2">menu3</a></li>
+                <li><a href="#menu4">menu4</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="main" class="container-fluid bg-1 text-center">
+        <h3>Who Am I?</h3>
+        <a href="#" class="frodo"><img src="../../images/b_frodo.png" class="img-circle" alt="frodo" width="350"
+                height="350"></a>
+        <h3>I'm FRODO</h3>
+    </div>
+
+    <div class="container-fluid bg-2 text-center">
+        <h3>What Am I?</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.</p>
+    </div>
+
+    <div class="container-fluid bg-3 text-center">
+        <h3>Where To Find Me?</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.</p>
+    </div>
+
+
+
+    <!-- Container (Portfolio Section) -->
+    <div id="menu1" class="container-fluid text-center bg-grey">
+        <h2>Portfolio</h2><br>
+        <h4>Character</h4>
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <a href="#"><img src="../../images/k1.png" alt="Paris" width="400" height="300"></a>
+                    <p><strong>무지</strong></p>
+                    <p>안녕~ 난 무지야</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <a href="#"><img src="../../images/k2.png" alt="New York" width="400" height="300"></a>
+                    <p><strong>어피치</strong></p>
+                    <p>hi~ my name is 어피치~!</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <a href="#"><img src="../../images/k3.png" alt="San Francisco" width="400" height="300"></a>
+                    <p><strong>제이지</strong></p>
+                    <p>나는 제이지라구~</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu2" class="jumbotron text-center">
+        <h1>Company</h1>
+        <p>We specialize in blablabla</p>
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="email" class="form-control" size="50" placeholder="Email Address" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger">Subscribe</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Container (About Section) -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>About Company Page</h2>
+                <h4>Lorem ipsum..</h4>
+                <p>Lorem ipsum..</p>
+                <button class="btn btn-default btn-lg">Get in Touch</button>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-signal logo"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-grey">
+        <div class="row">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-globe logo"></span>
+            </div>
+            <div class="col-sm-8">
+                <h2>Our Values</h2>
+                <h4><strong>MISSION:</strong> Our mission lorem ipsum..</h4>
+                <p><strong>VISION:</strong> Our vision Lorem ipsum..</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container (Services Section) -->
+    <div id="menu4" class="container-fluid text-center">
+        <h2>SERVICES</h2>
+        <h4>What we offer</h4>
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-off logo-small"></span>
+                <h4>POWER</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-heart logo-small"></span>
+                <h4>LOVE</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-lock logo-small"></span>
+                <h4>JOB DONE</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-leaf logo-small"></span>
+                <h4>GREEN</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-certificate logo-small"></span>
+                <h4>CERTIFIED</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-wrench logo-small"></span>
+                <h4 style="color:#303030;">HARD WORK</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
