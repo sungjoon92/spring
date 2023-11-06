@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .hide {
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        line-height: 0;
+    }
+
+
+    #nav {
+        width: 200px;
+        margin: 0 auto;
+        background-color: silver;
+    }
+
+    #nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+    }
+
+
+    #nav ul li a {
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+        width: 200px;
+        height: 64px;
+        display: block;
+        text-indent: 30px;
+        line-height: 64px;
+        /* 들여쓰기 */
+
+        background-image: url(../../images/icons.png);
+        background-repeat: no-repeat;
+        /* 백그라운드 반복 x */
+        background-position: right 0;
+    }
+
+    #nav ul li:nth-child(1) a:hover {
+        background-color: hotpink;
+    }
+
+    #nav ul li:nth-child(2) a:hover {
+        background-color: darkcyan
+    }
+
+    #nav ul li:nth-child(3) a:hover {
+        background-color: green
+    }
+
+    #nav ul li:nth-child(4) a:hover {
+        background-color: black
+    }
+
+    #nav ul li a:hover {
+        width: 240px;
+        color: white;
+        font-size: 16px;
+        text-shadow: 2px 2px 2px black;
+
+        border-radius: 0 32px 32px 0;
+        /* 모서리 라운드 11시 1시 5시 7시 순 */
+
+        opacity: 0.8;
+        transition: width 0.5s ease;
+        /* 가로방향 0.5초 부드럽게 */
+    }
+
+
+    /* 각각 다른 이미지를 보여주기 위해 각이미지 여백 조절 */
+    #nav ul li:nth-child(2) a {
+        background-position: right -66px;
+    }
+
+    #nav ul li:nth-child(3) a {
+        background-position: right -464px;
+    }
+
+    #nav ul li:nth-child(4) a {
+        background-position: right -528px;
+    }
+</style>
+
+<body>
+    <h1 class="hide">플래시메뉴</h1>
+
+    <div id="nav">
+        <h2 class="hide">주요메뉴</h2>
+        <ul>
+            <li><a href="#">fllckr</a></li>
+            <li><a href="#">twitter</a></li>
+            <li><a href="#">newsvine</a></li>
+            <li><a href="#">last.fm</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #menu {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        background-color: silver;
+        margin: auto;
+        border-radius: 15px;
+    }
+
+
+
+    #menu:hover {
+        background-color: orange;
+        cursor: pointer;
+        transition: 1s;
+
+    }
+
+    #menu strong {
+        position: absolute;
+        left: 35px;
+        bottom: 15px;
+    }
+
+    #menu .gear {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-image: url(../../images/gear-gray.png);
+        background-size: 50px 50px;
+    }
+
+    #menu .gear:nth-child(1) {
+        top: 15px;
+        left: 40px;
+    }
+
+    #menu .gear:nth-child(2) {
+        top: 60px;
+        left: 65px;
+        transform: rotate(30deg);
+    }
+
+    #menu:hover .gear {
+        background-image: url(../../images/gear.png);
+        transition: 1s;
+
+    }
+
+    #menu:hover .gear:nth-child(1) {
+        transform: rotate(-180deg);
+    }
+
+    #menu:hover .gear:nth-child(2) {
+        transform: rotate(180deg);
+    }
+</style>
+
+<body>
+
+    <div id="menu">
+        <div class="gear"></div>
+        <div class="gear"></div>
+        <strong>SETTINGS</strong>
+    </div>
+
+
+    <!-- https://www.w3schools.com/css/css3_transitions.asp -->
+</body>
+
+</html>
