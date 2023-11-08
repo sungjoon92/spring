@@ -9,4 +9,13 @@ CREATE TABLE mediagroup (
 
 
 -- 시퀀스 생성
-create sequence mediagroup_seq;
+CREATE SEQUENCE mediagroup_seq;
+
+-- 행 삭제
+DELETE FROM mediagroup;
+
+
+-- 행 수정
+SELECT * FROM mediagroup WHERE meediagroupno=22
+
+UPDATE title SET 
