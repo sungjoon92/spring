@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>media.jsp</title>
+<title>list.jsp</title>
 <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -23,7 +23,7 @@
 <script>
 </script>
 <body>
-	<!-- //http://localhost:9095/home.do -->
+<!-- //http://localhost:9095/home.do -->
 	<div class="title">미디어 그룹 목록</div>
 
 
@@ -47,7 +47,8 @@
 				<tr>
 					<td>${vs.count}</td>
 					<td>${dto.mediagroupno }</td>
-					<td>${dto.title }</td>
+					<td><a href="../media/list.do?mediagroupno=${dto.mediagroupno}">${dto.title}</a></td>
+					
 					<td>
 						<input type="button" value="수정" onclick="location.href='update.do?mediagroupno=${dto.mediagroupno}'"> 
 						<input type="button" value="삭제" onclick="location.href='delete.do?mediagroupno=${dto.mediagroupno}'">
@@ -55,10 +56,13 @@
 				</tr>
 			</c:forEach>
 		</table>
-		
-		<!-- 페이지 리스트 -->
-		
 	</c:if>
+
+
+
+
+
+
 
 </body>
 </html>
