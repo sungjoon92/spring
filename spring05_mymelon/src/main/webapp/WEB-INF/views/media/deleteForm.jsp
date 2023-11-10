@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>media.jsp</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<style>
+* {
+	font-family: gulim;
+	font-size: 24px;
+}
+</style>
+
+<body>
+
+	<div class="title">미디어 그룹 삭제</div>
+
+	<form name="frm" method="post" action="delete.do">
+	    <!-- MediaCont.java의 @GetMapping("media/delete.do")에서 가리킴
+	    	 mav.addObject("mediano", mediano);
+		     mav.addObject("mediagroupno", mediagroupno);
+	     -->
+		<input type="hidden" name="mediagroupno" value="${mediagroupno}">
+		<input type="hidden" name="mediano" value="${mediano}">
+		<div class="content">
+			<p>미디어 그룹을 삭제하시겠습니까?</p>
+			<p>관련 미디어 파일(mp3, mp4)도 전부 삭제합니다</p>
+		</div>
+
+		<div class="bottom">
+			<input type="submit" value="삭제">
+			<input type="button" value="목록" onclick="location.href='list.do?mediagroupno=${mediagroupno}'" >
+		</div>
+	</form>
+
+
+
+</body>
+</html>

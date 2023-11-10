@@ -55,12 +55,12 @@
 					${dto.filename}<br>
 					${dto.filesize}<br>
 					<c:set var="filesize" value="${fn:substringBefore(dto.filesize/1024, '.') }"></c:set>
-					${filesize }KB
+					${filesize }KBz
 				</td>
 
 				<td>
-					<input type="button" value="수정"> 
-					<input type="button" value="삭제">
+					<input type="button" value="수정" onclick="location.href='update.do?mediano=${dto.mediano}'"> 
+					<input type="button" value="삭제" onclick="location.href='delete.do?mediano=${dto.mediano}&mediagroupno=${dto.mediagroupno}'">
 				</td>
 			</tr>
 

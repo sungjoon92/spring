@@ -24,17 +24,17 @@ public class MediaDAO {
 		System.out.println("MediaDAO()객체 생성됨");
 	}// end
 
-	public List<MediaDTO> list(int mediagroupno){
+	public List<MediaDTO> list(int mediagroupno) {
 		List<MediaDTO> list = null;
 		try {
-			sql=new StringBuilder();
+			sql = new StringBuilder();
 			sql.append(" select mediano, title, poster, poster, filename, filesize, mview, rdate, mediagroupno ");
 			sql.append(" FROM media ");
 			sql.append(" WHERE mview='Y' AND mediagroupno= " + mediagroupno);
 			sql.append(" ORDER BY mediano DESC ");
-		
-			RowMapper<MediaDTO> rowMapper=new RowMapper<MediaDTO>() {
-				
+
+			RowMapper<MediaDTO> rowMapper = new RowMapper<MediaDTO>() {
+
 				@Override
 				public MediaDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 					MediaDTO dto = new MediaDTO();
@@ -46,10 +46,10 @@ public class MediaDAO {
 					dto.setMview(rs.getString("mview"));
 					dto.setRdate(rs.getString("Rdate"));
 					dto.setMediagroupno(rs.getInt("mediagroupno"));
-					
+
 					return dto;
-				}//mapRow() end
-			};//rowMapper
+				}// mapRow() end
+			};// rowMapper
 
 			list = jt.query(sql.toString(), rowMapper);
 
@@ -59,37 +59,35 @@ public class MediaDAO {
 		return list;
 	}// list() end
 
-	
-	///////음원 등록//////
+	/////// 음원 등록//////
 	public int create(MediaDTO dto) {
-		int cnt=0;
+		int cnt = 0;
 		try {
-			sql=new StringBuilder();
-			
+			sql = new StringBuilder();
+
 			sql.append(" INSERT INTO media(mediano, title, poster, filename, filesize, mediagroupno, rdate) ");
 			sql.append(" VALUES (media_seq.nextval, ?, ?, ?, ?, ?, sysdate) ");
-			
-			cnt=jt.update(sql.toString(), dto.getTitle(),dto.getPoster(), dto.getFilename(), dto.getFilesize(), dto.getMediagroupno());
-			} catch (Exception e) {
-			System.out.println("음원등록실패"+e);
-		}//end
+
+			cnt = jt.update(sql.toString(), dto.getTitle(), dto.getPoster(), dto.getFilename(), dto.getFilesize(),
+					dto.getMediagroupno());
+		} catch (Exception e) {
+			System.out.println("음원등록실패" + e);
+		} // end
 		return cnt;
 	}// create() end
-	
-	
-	
+
 	//////// 상세보기////////
 	public MediaDTO read(int mediano) {
 		MediaDTO dto = null;
 		try {
-			sql=new StringBuilder();
+			sql = new StringBuilder();
 			sql.append(" select mediano, title, poster, poster, filename, filesize, mview, rdate, mediagroupno ");
 			sql.append(" FROM media ");
 			sql.append(" WHERE mediano = " + mediano);
-		
-			RowMapper<MediaDTO> rowMapper=new RowMapper<MediaDTO>() {
-				
-			@Override
+
+			RowMapper<MediaDTO> rowMapper = new RowMapper<MediaDTO>() {
+
+				@Override
 				public MediaDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 					MediaDTO dto = new MediaDTO();
 					dto.setMediano(rs.getInt("mediano"));
@@ -105,15 +103,44 @@ public class MediaDAO {
 				}// mapRow() end
 			};// rowMapper
 
-		dto = jt.queryForObject(sql.toString(), rowMapper);
+			dto = jt.queryForObject(sql.toString(), rowMapper);
 
-	} catch (Exception e) {
-		System.out.println("media 목록살패:" + e);
-	} // end
-	return dto;
-}// list() end
+		} catch (Exception e) {
+			System.out.println("media 목록살패:" + e);
+		} // end
+		return dto;
+	}// read() end
+
+	public int update(MediaDTO dto) {
+		int cnt = 0;
+		try {
+			sql = new StringBuilder();
+			sql.append(" UPDATE media ");
+			sql.append(" 	SET title=?, poster=?, filename=?, filesize=?");
+			sql.append("  WHERE mediano = ? ");
+
+			cnt = jt.update(sql.toString(), dto.getTitle(), dto.getPoster(), dto.getFilename(), dto.getFilesize(),
+					dto.getMediano());
+
+		} catch (Exception e) {
+			System.out.println("수정 살패:" + e);
+		} // end
+		return cnt;
+	}// update() end
+
 	
-	
-	
+	public int delete(MediaDTO dto) {
+		int cnt = 0;
+		try {
+			sql = new StringBuilder();
+			sql.append(" DELETE FROM media ");
+			sql.append("  WHERE mediano = ? ");
+
+			cnt = jt.update(sql.toString(), dto.getMediano());
+		} catch (Exception e) {
+			System.out.println("미디어삭제 살패:" + e);
+		} // end
+		return cnt;
+	}// update() end
 
 }// class end

@@ -28,9 +28,10 @@
 
 	<!-- //http://localhost:9095/home.do -->
 	<div class="title">mp4 듣기</div>
+	
 	<div class="content">
 		<p>${dto.title }</p>
-		<video alt="" src="../storage/${dto.filename }" poster="../storage/${dto.poster } width="500px" controls></video> 		
+		<video src="../storage/${dto.filename }" poster="..storage/${dto.poster }" width="300" controls ></video>
 	</div>
 </body>
 </html>

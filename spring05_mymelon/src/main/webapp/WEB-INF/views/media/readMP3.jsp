@@ -9,8 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>readMP3.jsp</title>
-	<link href="../css/style.css" rel="stylesheet" type="text/css">
+<title>readMP3.jsp</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <style>
@@ -28,10 +28,11 @@
 
 	<!-- //http://localhost:9095/home.do -->
 	<div class="title">mp3 듣기</div>
-	
+
 	<div class="content">
 		<p>${dto.title }</p>
-		<audio src="../storage/${dto.filename }" controls></audio> 		
+		<img src="../storage/${dto.poster }" width="400"><br>
+		<audio src="../storage/${dto.filename }" controls></audio>
 	</div>
 
 
