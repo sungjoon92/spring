@@ -28,7 +28,7 @@ public class MediaDAO {
 		List<MediaDTO> list = null;
 		try {
 			sql = new StringBuilder();
-			sql.append(" select mediano, title, poster, poster, filename, filesize, mview, rdate, mediagroupno ");
+			sql.append(" select mediano, title, poster, filename, filesize, mview, rdate, mediagroupno ");
 			sql.append(" FROM media ");
 			sql.append(" WHERE mview='Y' AND mediagroupno= " + mediagroupno);
 			sql.append(" ORDER BY mediano DESC ");
