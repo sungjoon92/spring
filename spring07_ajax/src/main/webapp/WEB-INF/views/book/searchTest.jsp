@@ -15,24 +15,24 @@
 	<h3>교재 검색</h3>
 
 	<form name="search" id="search" action="">
-		<input type="text" name="keyword" id="keyword">
-		<input type="button" value="검색">
+		<input type="text" name="keyword" id="keyword"> <input
+			type="button" value="검색">
 	</form>
-	 
+
 	<!-- 검색 결과 출력 -->
-	
-	<div id="panel" style="display:none;"></div>
+
+	<div id="panel" style="display: none;"></div>
 	<div id="display"></div>
-	
+
 	<script>
 		$("#keyword").keyup(function() {
 			//alert("test");
-			
-			if($("#keyword").val()==""){
-			$("#panel").hide();		//검색어가 존재하지않으면 출력어를 숨긴다
-		}//if endS
-	
-		//1) id="keyword" 값 가져오기
+
+			if ($("#keyword").val() == "") {
+				$("#panel").hide(); //검색어가 존재하지않으면 출력어를 숨긴다
+			}//if endS
+
+			//1) id="keyword" 값 가져오기
 			//let params = $("#keyword").val();
 			//alert(params);
 
@@ -44,7 +44,26 @@
 			$.post("searchproc.do", params, responseProc);
 		})//keyup() end
 
+		
 		function responseProc(data) {
+			
+			if (data.length>0) { // 응답받은 내용이 있는지
+				// | 기호를 기준으로 문자열 분리
+				let result = data.split("|");
+
+				let str = result[1].split(",");
+				let title = "";
+
+				$.each(str, function(index, key) {
+					title += "<a href='#'>" + key + "</a>";
+					title += "<br>";
+				});//if end
+
+				$("#panel").html(title);
+				$("#panel").show();
+			} else {
+				$("#panel").hide();
+			}//if end
 		}//responseProc() end
 	</script>
 </body>
