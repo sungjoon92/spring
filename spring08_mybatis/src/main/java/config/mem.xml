@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mem">
+
+
+	<!-- 행추가 -->
+	<insert id="insertRow" parameterType="memDTO">
+		INSERT INTO mem(num, name, age)
+		VALUES(mem_seq.nextval, #{name}, ${age})
+	</insert>
+
+	<!-- ResultSet에서 행값을 가져와서 DTO에 담고, ArrayList에 추가하는 기능 -->
+	<!-- DB에서 가져온 행값을 객체에 매핑하는 방법을 정의 -->
+	<resultMap type="net.mem.MemDTO" id="rs">
+		<result column="num" property="num"></result>
+		<result column="name" property="name"></result>
+		<result column="age" property="age"></result>
+	</resultMap>
+
+  	<!-- 행 전체조회 -->
+	<select id="selectAll" resultMap="rs">
+		SELECT num, name, age
+		FROM mem
+		ORDER BY num DESC
+	</select>
+
+	<!-- 행 업데이트 -->
+	<update id="updateRow" parameterType="memDTO">
+		UPDATE mem
+		SET name =#{name}, age=#{age}
+		WHERE num = #{num}
+	</update>
+
+	<!-- 행 삭제 -->
+	<!-- <delete id="deleteRow" parameterType="int">
+		DELETE from mem
+		WHERE age >=#{a}
+	</delete> -->
+
+
+	<!-- SQL문엣 특수문자 < > / 등을 사용해야 하는경우 -->
+	<!-- 낮은 버전에서는 <![CDATA[ ]]> 를 사용해야 SQL문 기호로 인식한다-->
+	<!-- int a 라는 매개변수 -->
+	<delete id="deleteRow" parameterType="int">
+		<![CDATA[
+			DELETE from mem
+			WHERE age >= #{a}
+		]]>
+	</delete>
+
+	<!-- sql태그로 jsp처럼 따로 적용하는 방식 -->
+	<sql id="tablename">
+		SELECT num, name, age
+		FROM mem
+	</sql>
+	
+	<sql id="sort">
+		ORDER BY num DESC
+	</sql>
+ 
+	<select id="search" parameterType="String" resultMap="rs">
+		<include refid="tablename"></include>
+		WHERE name LIKE '%' || #{keyword} || '%'
+		<include refid="sort"></include>
+	</select>
+	
+	<!-- 행의 특정 값을 적용해서 조회 -->
+	<select id="selectRead" parameterType="int" resultMap="rs">
+		SELECT num, name, age
+		FROM mem
+		WHERE num = #{n}
+	</select>
+	
+	<!-- 행 갯수 조회 -->
+	<select id="rowCount" resultType="integer">
+		SELECT COUNT(*)
+		FROM mem
+	</select>
+
+</mapper>
+ 
