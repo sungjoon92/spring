@@ -18,7 +18,54 @@
 </head>
 
 <style>
+
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	 #loader {
+        width: 100%;
+        height: 50%;
+        background-color: #ede9df;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        background-image: url(./loader.gif);
+        background-repeat: no-repeat;
+        background-position: center;
+		display: none;
+    } 
+
 	
+	.commentArea tr{
+		display:flex;
+		justify-content: space-between;
+	}
+	.commentArea td{
+		font-size: 20px;
+		text-align: left;
+	}
+	
+	.commentArea a{
+		width: 100%;
+		border: 1px solid #000;
+		border-radius: 10px;
+		padding: 0 3%;
+		text-align: center;
+	}
+	.content_text{
+		text-align: left;
+		width: 100%;
+		float: right;
+	}
+	.button{
+		float: right;
+		width: 5%;
+		font-size: 20px;
+	
+	}	
+
+
 </style>
 
 
@@ -66,7 +113,8 @@
 
 <div class="container text-center">
   <!-- 본문 시작 -->
-  
+  <!-- 로딩 이미지 -->
+  <div id="loader"></div>
   <div class="row">
     <div class="col-sm-12">
     	<p><h3>상품목록</h3></p>
@@ -139,18 +187,25 @@
     
 		<div class="row">
 			<div class="col=sm=12"><!-- 댓글 목록 -->
-				<div class="commetnList"></div>
+				<div class="commentList" >
+				</div>
 			</div><!-- col end -->
 		</div><!-- row end -->
 	<!-- 댓글 끝 -->
 
+
+
 <!-- 댓글 관련 자바 스크립트 -->    
 <script>
+
 	let product_code = '${product.PRODUCT_CODE }';//부모글 번호
+	$(function() {
+		commentList();
+		
+	})//end
 	
 	//댓글 등록 버튼을 클릭했을때
 	$("#commentInsertBtn").click(function() {
-		
 		// alert($);
 		let content = $("#content").val();
 		content = content.trim();
@@ -165,6 +220,7 @@
 		}//if end
 	});//click() end
 
+	
 	// 댓글 등록 함수
 	function commentInsert(insertData){
 		//alert("댓글등록 함수 호출:" + insertData);
@@ -172,14 +228,156 @@
 			 url     : '/comment/insert'	//요청명령어
 			 ,type   : 'post'				//요청방식
 			 ,data   : insertData			//전달값
-			 ,error  : function(error){			//에러시 호출값
+			 ,error  : function(error){		//에러시 호출값
 				alert(error);
 			 }//error end					
-			 ,success: function(data){			//성공시 호출값
-				alert(data);
+			 ,success: function(result){		//성공시 호출값
+				 //alert(result); object
+				 if(result == 1){ //댓글 등록 성공
+					 commentList();//댓글 등록후 댓글목록 함수 호출
+					 $("#content").val("");//기존 댓글 내용을 빈 문자열로 대입(초기화)
+				 }else{
+				 }//if end
 			 }//success	end	
 		})//ajax() end
 	};// commentInsert() end 
+	
+	
+	//댁글 조회 함수
+	function commentList() {
+		//alert("댓글목록 함수 호출");
+		$.ajax({
+				url		: '/comment/list'
+				,type	: 'get'
+				,data	: {"product_code" : product_code}//부모글 번호 (전역변수로 선언되어있음)
+				,error	: function(error){
+					alert(error);
+					//console.log(error);
+				}//error end
+				,success: function(result){
+					//alert(result);
+					//console.log(result);
+					let a="";
+					$.each(result, function(key, value) {
+						//console.log(key); 	//순서 0 1 2 3
+						//console.log(value);	//[object object]
+						// console.log(value.cno)
+						// console.log(value.content)
+						// console.log(value.product_code)
+						// console.log(value.wname)
+						// console.log(value.regdate)
+						
+						
+						
+				        // a += '댓글번호:' + value.cno +' / 작성자:' + value.wname  + '' +  value.regdate;
+				        // a += '<p>내용:' + value.content + '</p>';
+
+			            a += "<table class='commentArea' style='border-bottom:1px solid darkgray; margin-bottom:15px; width:100%;'>";
+			            a += "	<tbody class='commentInfo" + value.cno + "'>";
+			            a += "		<tr>";
+		                a += "  		<td>댓글번호 : "+ value.cno 	 + "</td>";
+		                a += "   		<td>작성자 : "  + value.wname	 + "</td>";
+		                a += "  		<td>" 		    + value.regdate  + "</td>";
+						a += "		</tr>";
+						a += "		<tr>";
+						a += " 			<td class='commentContent" + value.cno + "'></td>"
+		                a += "   		<td class='content_text'>내용 : " + value.content + "</td>";
+					 // a += '   		<td><a href="javascript:commentUpdate(' + value.cno +',\'' + value.content + '\')">수정</a></td>';
+						a += " 			<td class='button'><a href='javascript:commentUpdate("+ value.cno + ",\"" + value.content + "\")'>수정</a></td>";
+						a += " 			<td class='button'><a href='javascript:commentDelete("+ value.cno + ")'>삭제</a></td>";
+		                a += "		</tr>";
+		                a += "	</tbody>";
+		                a += "</table>";
+					});//each() end
+					$(".commentList").html(a);
+				}//success end
+			});//ajax() end
+	}//commentList() end
+	
+
+	//댓글 수정 - 전달받은 댓글내용을 <input type=text>에 출력
+	function commentUpdate(cno, content){
+		//alert(cno+content);
+
+	  let a ="";
+      a += "<div class='input-group'>";
+      a += "   <input type='text' value='" + content +"' id='content_"+ cno +"'>";
+      a += "   <button type='button' onclick='commentUpdateProc("+ cno +")'>수정</button>";
+      a += "</div>";
+      //alert(a);
+      $(".commentContent" + cno).html(a);
+	}//commentUpdate end
+	
+	//댓글 수정후 댓글목록함수 호출
+	function commentUpdateProc(cno){
+		let updateContent = $("#content_" + cno).val();
+
+
+		$.ajax({
+			url : '/comment/update'
+			,type:'post'
+			,data:{'cno':cno, 'content':updateContent}
+			,success:function(){
+
+			}
+		})//ajax() end
+	}//commentUpdateProc end
+
+/* 	
+	$(".commentreset").click(function() {
+		let listData = $(".commentList");
+		document.productfrm.action="/comment/list";
+		document.productfrm.submit();
+		commentlist(listData);//댓글등록 함수 호출
+	})//click() end
+	
+	 
+	// 댓글 조회 함수
+	function commentlist(listData){
+		 $("#loader").show();
+		//alert("댓글등록 함수 호출:" + insertData);
+		$.ajax({
+			 url     : '/comment/list'	//요청명령어
+			 ,type   : 'post'			//요청방식		
+			 ,data   : listData			//전달값
+			 ,error  : function(error){		//에러시 호출값
+				//alert(error);
+			 }//error end					
+			 ,success: function(data){			//성공시 호출값
+				 alert(data);
+				 $(".commentList table").append(data);
+				 $(data).each(function () {
+					 
+						//tbody 삭제					 
+					 $("table").empty();
+					 
+			           //let $tr = $("<tr>");
+			           //let $td1 = $("<td>").text(${content});
+			           //let $td2 = $("<td>").text(${wname});
+			           //let $td3 = $("<td>").text(${regdate});
+			           //$tr.append($td1, $td2, $td3).appendTo("tbody");
+					 	
+			           let str="";
+			           
+			            str += "<table>";
+			            str += "<tbody>";
+			            str += "<tr>";
+		                str += "   <td>" + ${content} + "</td>";
+		                str += "   <td>" + ${wname} + "</td>";
+		                str += "   <td>" + ${regdate}+ "</td>";
+		                str += "</tr>";
+		                str += "</tbody>";
+		                str += "</table>";
+			       })//each end
+			       
+				   
+			 }//success	end	
+		
+		})//ajax() end
+		 $("#loader").fadeOut(500);
+	};// commentInsert() end 
+	 */
+	
 	
 </script>
     
@@ -200,4 +398,3 @@
 	-->
 </body>
 </html>
-    

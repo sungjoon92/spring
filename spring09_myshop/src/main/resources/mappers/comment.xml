@@ -12,5 +12,13 @@
 		INSERT INTO pcomment(cno, product_code, content, wname)
 		VALUES(pcomment_seq.nextval, #{product_code}, #{content}, #{wname})
 	</insert>
+	
+	<!-- 조회 -->
+	<select id="list" parameterType="int" resultType="kr.co.itwill.comment.CommentDTO">
+		SELECT cno, product_code, content, wname, regdate
+		FROM pcomment
+		WHERE product_code = #{product_code}
+		ORDER BY regdate DESC
+	</select>
 
 </mapper>
