@@ -67,6 +67,9 @@ div {
 	}
 }
 
+h1{
+	cursor: pointer;
+}
 
 </style>
 
@@ -74,7 +77,7 @@ div {
 <body>
 
 	<div class="p-5 bg-info text-white text-center">
-		<h1>My Shop</h1>
+		<h1 onclick="javascript.href='http://localhost:9095/product/list'">My Shop</h1>
 	</div>
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -94,7 +97,7 @@ div {
 		<div class="row">
 			<div class="col-sm-12">
 				<p>
-				<h3>상품목록</h3>
+				<h3 style="corsur">상품목록</h3>
 				</p>
 				<p>
 					<button type="button" onclick="location.href='write'"

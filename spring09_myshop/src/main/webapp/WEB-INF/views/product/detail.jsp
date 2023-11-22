@@ -49,23 +49,29 @@
 	.commentArea a{
 		width: 100%;
 		border: 1px solid #000;
-		border-radius: 10px;
+		border-radius: 20px;
 		padding: 0 3%;
 		text-align: center;
+		font-size: 20px;
+	}
+	.commentArea a:nth-child(1){
+		float: right;
 	}
 	.content_text{
 		text-align: left;
-		width: 100%;
+		width: 90%;
 		float: right;
 	}
 	.button{
 		float: right;
-		width: 5%;
-		font-size: 20px;
-	
+		width: 80px;
 	}	
-
-
+	.button a{
+		background-color: bisque;
+	}
+	.date p{
+		text-align: right;
+	}
 </style>
 
 
@@ -78,17 +84,21 @@
 	
 	function product_delete() {
 		//docment.productfrm은 본문의 <form name=productfrm>을 가리킴
-		if(confirm("첨부된 파일은 영구히 삭제됩니다\n진행할까요?"))
+		if(confirm("첨부된 파일은 영구히 삭제됩니다\n진행할까요?")){
 		document.productfrm.action="/product/delete";
 		document.productfrm.submit();
+		}//if end
 	}//product_delete() end
 	
-	function product_cart() {
-		document.productfrm.action="/product/cart";
-		document.productfrm.submit();
-}//product_cart() end
-
-
+	//장바구니 넣기
+	function product_cart(){
+		if($("#qty").val()=="0"){
+			alert("상품수량 선택해 주세요~");
+		}else{
+			document.productfrm.action="/cart/insert";
+			document.productfrm.submit();
+		}//if end
+	}//product_cart() end
 
 
 </script>
@@ -153,6 +163,17 @@
 							<input type="file" name="img" class="form-control">
 						</td>
 					</tr>
+						<td>상품수량</td>
+						<td>
+							<select name="qty" id="qty" class="form-control">
+								<option value="0">@선택@</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</td>
 				    <tr>
 						<td colspan="2" align="center">
 						    <input type="submit" value="상품수정" 		class="btn btn-success"  onclick="product_update() " style="background-color:red" value="${product.PRODUCT_CODE}"> 
@@ -201,7 +222,6 @@
 	let product_code = '${product.PRODUCT_CODE }';//부모글 번호
 	$(function() {
 		commentList();
-		
 	})//end
 	
 	//댓글 등록 버튼을 클릭했을때
@@ -277,7 +297,7 @@
 			            a += "		<tr>";
 		                a += "  		<td>댓글번호 : "+ value.cno 	 + "</td>";
 		                a += "   		<td>작성자 : "  + value.wname	 + "</td>";
-		                a += "  		<td>" 		    + value.regdate  + "</td>";
+		                a += "  		<td class='date'><p>" 		    + value.regdate  + "</p></td>";
 						a += "		</tr>";
 						a += "		<tr>";
 						a += " 			<td class='commentContent" + value.cno + "'></td>"
@@ -316,73 +336,43 @@
 		$.ajax({
 			url : '/comment/update'
 			,type:'post'
-			,data:{'cno':cno, 'content':updateContent}
-			,success:function(){
-
-			}
+			,data:{'cno':cno, 'content':updateContent}//"cno="+cno+&content="+updateContent"
+			,success:function(result){
+				if(result==1){
+					alert("댓글이 수정되었습니다")
+					commentList(); //댓글수정후 목록 출력
+				}//if end
+			}//success end
 		})//ajax() end
 	}//commentUpdateProc end
-
-/* 	
-	$(".commentreset").click(function() {
-		let listData = $(".commentList");
-		document.productfrm.action="/comment/list";
-		document.productfrm.submit();
-		commentlist(listData);//댓글등록 함수 호출
-	})//click() end
 	
-	 
-	// 댓글 조회 함수
-	function commentlist(listData){
-		 $("#loader").show();
-		//alert("댓글등록 함수 호출:" + insertData);
+	function commentDelete(cno) {
+		//alert("댓글삭제" + cno);
+		if(confirm("댓글이 영구히 삭제됩니다\n진행할까요?")){
 		$.ajax({
-			 url     : '/comment/list'	//요청명령어
-			 ,type   : 'post'			//요청방식		
-			 ,data   : listData			//전달값
-			 ,error  : function(error){		//에러시 호출값
-				//alert(error);
-			 }//error end					
-			 ,success: function(data){			//성공시 호출값
-				 alert(data);
-				 $(".commentList table").append(data);
-				 $(data).each(function () {
-					 
-						//tbody 삭제					 
-					 $("table").empty();
-					 
-			           //let $tr = $("<tr>");
-			           //let $td1 = $("<td>").text(${content});
-			           //let $td2 = $("<td>").text(${wname});
-			           //let $td3 = $("<td>").text(${regdate});
-			           //$tr.append($td1, $td2, $td3).appendTo("tbody");
-					 	
-			           let str="";
-			           
-			            str += "<table>";
-			            str += "<tbody>";
-			            str += "<tr>";
-		                str += "   <td>" + ${content} + "</td>";
-		                str += "   <td>" + ${wname} + "</td>";
-		                str += "   <td>" + ${regdate}+ "</td>";
-		                str += "</tr>";
-		                str += "</tbody>";
-		                str += "</table>";
-			       })//each end
-			       
-				   
-			 }//success	end	
-		
-		})//ajax() end
-		 $("#loader").fadeOut(500);
-	};// commentInsert() end 
-	 */
+				url : '/comment/delete/' + cno	//RESTful방식으로 웹 서비스요청. 예)/comment/delete/5
+				,type :'post'
+				//,data:{'cno':cno}
+				,success:function(result){
+					if(result==1){
+						alert("댓글이 삭제되었습니다")
+						commentList(); //댓글수정후 목록 출력
+					}else{
+						alert("댓글삭제실패:로그인후 사용이 가능합니다");
+					}//if end
+				}//success end
+		});//ajax() end
+		}//if end
+	}//commentDelete() end
+	
+	
+	
+	
+	
+	
 	
 	
 </script>
-    
-    
-    
     
   <!-- 본문 끝 -->
 </div><!-- container end -->

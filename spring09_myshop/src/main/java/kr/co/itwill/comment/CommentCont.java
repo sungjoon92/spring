@@ -3,9 +3,11 @@ package kr.co.itwill.comment;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,9 +82,28 @@ public class CommentCont {
 	
 	
 	
+		@PostMapping("/update")
+		@ResponseBody
+		public int mCommentServiceUpdateProc(@RequestParam int cno, String content)throws Exception {
+			CommentDTO commentDto = new CommentDTO();
+			commentDto.setCno(cno);
+			commentDto.setContent(content);
+			//로그인하고 난 후, 댓글 수정을 하려면 -> mCommentserviceInsert() 함수
+			
+			int cnt = commentDao.commentUpdate(commentDto);
+			return cnt;
+		}//mCommentserviceInsert() 
+		
+		
+		@PostMapping("/delete/{cno}")
+		@ResponseBody
+		public int mCommentServiceDelete(@PathVariable int cno)throws Exception{
+			int cnt = commentDao.commentDelete(cno);
+			return cnt;
+		}//mCommentServiceDelete() end
+	 
 	
-	
-	
+		
 	
 	
 	
