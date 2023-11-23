@@ -4,7 +4,7 @@
 </div><!-- container end -->
 
 <div class="mt-5 p-4 bg-dark text-white text-center">
-  <p>ITWILL 아이티윌 교육센터</p>
+  <p style="font-size:35px">JooNy Shop</p>
 </div>
 
 </body>

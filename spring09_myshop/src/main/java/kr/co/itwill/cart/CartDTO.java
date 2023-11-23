@@ -3,7 +3,7 @@ package kr.co.itwill.cart;
 public class CartDTO {
 	private int cartno;       //number      primary key     --장바구니 번호
 	private int product_code; //number      not null        --상품코드
-	private int price;        //number      not null        --상품가격
+	private long price;        //number      not null        --상품가격
 	private int qty;          //number      default 0       --상품수량
 	private String id;        //varchar(15) not null        --아이디
 	private String regdate;   //date        default sysdate --작성일
@@ -20,10 +20,10 @@ public class CartDTO {
 	public void setProduct_code(int product_code) {
 		this.product_code = product_code;
 	}
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
 	public int getQty() {

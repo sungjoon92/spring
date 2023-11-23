@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>My Shop</title>
+    <title>JooNy Shop</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 <body>
 
 <div class="p-5 bg-info text-white text-center">
-  <h1>My Shop</h1>
+  <h1 onclick="location.href='http://localhost:9095/product/list'">JooNy Shop</h1>
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -30,6 +30,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link active" href="/cart/list">장바구니</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/inquiry/list">문의사항</a>
       </li>
     </ul>
   </div>

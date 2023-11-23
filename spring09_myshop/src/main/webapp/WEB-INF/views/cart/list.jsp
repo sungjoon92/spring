@@ -6,8 +6,8 @@
 <script>
 
 
-
-function cartDelete(cartno) {
+//장바구니 삭제
+/* function cartDelete(cartno) {
 	//alert("댓글삭제" + cno);
 	//alert(cartno);
 	if(confirm("첨부된 파일은 영구히 삭제됩니다\n진행할까요?")){
@@ -21,12 +21,28 @@ function cartDelete(cartno) {
 				}else{
 					alert("댓글삭제실패:로그인후 사용이 가능합니다");
 				}//if end
-				alert("댓글이 삭제되었습니다")
+				//alert("댓글이 삭제되었습니다")
 			}//success end
 			
 	});//ajax() end
 	}//if end
-}//commentDelete() end
+}//commentDelete() end */
+
+function cartDelete(cartno){
+    if(confirm("해당 상품을 삭제할까요?")){
+       //또다른 방법<form action='/cart/delete'></form>
+       //또다른 방법(RESTful) location.href='/cart/delete' + cartno;
+    	   location.href = '/cart/delete?cartno=' + cartno;
+    }//if end
+ }//cartDelete() end
+
+ 
+ 
+ function order() {
+	 if(confirm("주문하시겠습니까?")){
+	    	   location.href = '/order/orderform';
+	    }//if end
+}//order() end
 
 </script>
 
@@ -60,6 +76,11 @@ function cartDelete(cartno) {
 				</form>
 			</tbody>
 		</table>
+		
+		<br>
+		
+		<input type="button" value="계속쇼핑하기" onclick="location.href='/product/list'">
+		<input type="button" value="주문하기" onclick="order()">		
 	</div>
 	<!-- col end -->
 </div>

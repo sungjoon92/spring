@@ -1,6 +1,8 @@
 package kr.co.itwill.cart;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +30,12 @@ public class CartDAO {
 	}// cartList() end
 
 	
-	public int cartDelete(int cartno){
-		 System.out.println("11");
-		 return sqlSession.delete("cart.delete", cartno);
-	 }//commentUpdate() end
-	
+//	public int cartDelete(int cartno){
+//		 return sqlSession.delete("cart.delete", cartno);
+//	 }//cartDelete() end
+
+	public int cartDelete(HashMap<String, Object>map){
+		return sqlSession.delete("cart.delete", map);
+	}//cartDelete() end
 	
 }// CartDAO class end

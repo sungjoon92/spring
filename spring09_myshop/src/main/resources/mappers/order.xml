@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- commetn.xml -->
+
+
+<mapper namespace="order">
+<!-- 추가 -->
+	<select id="orderno" parameterType="String" resultType="String">
+		SELECT NVL(MAX(orderno),'1')
+		FROM orderlist
+		WHERE orderno LIKE #{cdate} || '%'
+	</select>
+	
+	<!-- <insert id="insert" parameterType="kr.co.itwill.order.OrderDTO">
+		INSERT INTO orderlist(orderno, id, totalamount, payment, deliverynm, deliveryaddr, deliverymsg, ordercheck)
+		VALUES (${orderno}, ${id}, ${totalamount}, ${payment}, ${deliverynm}, ${deliveryaddr}, #{deliverymsg}, #{ordercheck})
+	</insert> -->
+</mapper>
