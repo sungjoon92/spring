@@ -1,13 +1,17 @@
 package kr.co.itwill.cart;
 
 public class CartDTO {
+	
 	private int cartno;       //number      primary key     --장바구니 번호
 	private int product_code; //number      not null        --상품코드
 	private long price;        //number      not null        --상품가격
 	private int qty;          //number      default 0       --상품수량
 	private String id;        //varchar(15) not null        --아이디
 	private String regdate;   //date        default sysdate --작성일
-
+	private String filename;  //varchar(255)				--파일이름
+	private String product_name;  //varchar(255)				--파일이름
+                                                                                      	
+	
 	public int getCartno() {
 		return cartno;
 	}
@@ -44,11 +48,21 @@ public class CartDTO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	@Override
 	public String toString() {
 		return "CartDTO [cartno=" + cartno + ", product_code=" + product_code + ", price=" + price + ", qty=" + qty
-				+ ", id=" + id + ", regdate=" + regdate + "]";
+				+ ", id=" + id + ", regdate=" + regdate + ", filename=" + filename + "]";
 	}
+		
+	
+	
+	
 	
 	
 	

@@ -23,7 +23,7 @@
 			    <tbody style="text-align: left;">
 				    <tr>
 						<td>상품명</td>
-						<td> <input type="text" name="product_name" class="form-control" value="${product.PRODUCT_NAME}" > </td>
+						<td> <input type="text" name="product_name" id="product_name" class="form-control" value="${product.PRODUCT_NAME}" > </td>
 				    </tr>
 				    <tr>
 						<td>상품가격</td>
@@ -39,7 +39,7 @@
 						<td>상품사진</td>
 						<td>
 							<c:if test="${product.FILENAME != '-' }">
-								<img src="/storage/${product.FILENAME }" width="100px">
+								<img name="img" src="/storage/${product.FILENAME }" width="100px">
 							</c:if>
 							<input type="file" name="img" class="form-control">
 						</td>

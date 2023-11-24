@@ -13,14 +13,24 @@
 		VALUES (cart_seq.nextval, #{product_code}, #{price}, #{qty}, #{id})
 	</insert>
 	
-	<select id="list" resultType="kr.co.itwill.cart.CartDTO" parameterType="String">
-	SELECT cartno, product_code, price, qty, id, regdate
-	  FROM cart
-	 WHERE id=#{id}
-	 ORDER BY cartno
+
+
+
+	<!-- <select id="list" resultType="kr.co.itwill.cart.CartDTO" parameterType="String">
+		SELECT *
+		FROM cart
+		where id = #{id}
+	</select> -->
+	
+	<select id="list" resultType="java.util.Map" parameterType="String">
+		SELECT c.product_code, c.id, c.qty, c.price, p.product_name, p.filename ,c.cartno
+		FROM cart c JOIN product p 
+		ON c.product_code = p.product_code
+		where c.id = #{id}
 	</select>
-
-
+	
+	
+	
 	<!-- <delete id="delete" parameterType="int">
 		DELETE FROM cart
 		WHERE cartno=#{cartno}

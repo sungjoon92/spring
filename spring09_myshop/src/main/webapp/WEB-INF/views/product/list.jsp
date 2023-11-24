@@ -115,5 +115,5 @@ div {
 				<!-- row end -->
 				<!-- 본문 끝 -->
 			</div>
+			
 <%@ include file="../footer.jsp" %>
-//http://localhost:9095

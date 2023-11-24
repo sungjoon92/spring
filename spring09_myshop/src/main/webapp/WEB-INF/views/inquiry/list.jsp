@@ -25,6 +25,12 @@
 			 글 검색 : <input type="text" name="product_name"> <input
 					type="submit" value="검색" class="btn">
 			</p>
+			
+			<table>
+				<tr>
+					<td></td>
+				</tr>
+			</table>
 		</form>
 	</div><!-- col end -->
 </div><!-- row end -->

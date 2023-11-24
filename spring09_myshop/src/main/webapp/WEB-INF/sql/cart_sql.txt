@@ -13,3 +13,10 @@ create table cart (
 
 --상품번호 시퀀스 생성
 create sequence cart_seq;
+
+
+SELECT c.cartno, p.product_code, c.price, c.qty, c.id, c.regdate, p.filename
+FROM cart c JOIN product p 
+ON c.product_code = p.product_code
+WHERE c.id = #{id} AND p.filename = #{p.filename}
+ORDER BY c.cartno
