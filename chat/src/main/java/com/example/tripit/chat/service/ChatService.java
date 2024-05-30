@@ -1,65 +1,23 @@
 package com.example.tripit.chat.service;
 
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
-import com.example.tripit.chat.model.ChatRoom;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.tripit.chat.dao.ChatDao;
+import com.example.tripit.chat.dto.ChatMessage;
 
-import jakarta.annotation.PostConstruct;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Data
 @Service
 public class ChatService {
-    private final ObjectMapper mapper;
-    private Map<String, ChatRoom> chatRooms;
 
-    @PostConstruct
-    private void init(){
-        chatRooms = new LinkedHashMap<>();
-    }
-
-    public List<ChatRoom> findAllRoom(){
-        return new ArrayList<>(chatRooms.values());
-    }
-
-    public ChatRoom findRoomById(String roomId){
-        return chatRooms.get(roomId);
-    }
-
-    public ChatRoom createRoom(String name){
-        String roomId = UUID.randomUUID().toString();
-
-        //Builder를 사용하여 ChatRoom 을 Build
-        ChatRoom room = ChatRoom.builder()
-                .roomId(roomId)
-                .name(name)
-                .build();
-        chatRooms.put(roomId,room);//랜덤 아이디와 room 정보를 Map 에 저장
-        
-        return room;
-    }
-    
-    public <T> void sendMessage(WebSocketSession session, T message){
-        try{
-            session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));;
-        }catch (IOException e){
-            log.error(e.getMessage(),e);
-        }
-    }
-
-
-
+	@Autowired
+	ChatDao chatDao;
+	public void addMessage(int roomId, String writer, String body) {
+		chatDao.addMessage(roomId, writer, body);
+	}
+	public List<ChatMessage> getMessages() {
+		return chatDao.getMessages();
+	}
+	
 }
